@@ -4,14 +4,14 @@
 	"version": "0.0.1",
 	"author": "popeindustries <alex@pope-industries.com>",
 	"dependencies": {
-		"util.object": "git://github.com/popeindustries/util.object.git#0.0.1",
-		"util.easing": "git://github.com/popeindustries/util.easing.git#0.0.1",
-		"util.polyfill": "git://github.com/popeindustries/util.polyfill.git#0.0.1",
-		"dom.css": "git://github.com/popeindustries/dom.css.git#0.0.1"
+		"util.object": "git://github.com/thomaslein/util.identify.git#0.0.1",
+		"util.easing": "git://github.com/thomaslein/util.easing.git#0.0.1",
+		"util.polyfill": "git://github.com/thomaslein/util.polyfill.git#0.0.1",
+		"dom.css": "git://github.com/thomaslein/dom.css.git#0.0.1"
 	},
 	"main": "index.js",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/popeindustries/util.animate.git"
+		"url": "git://github.com/thomaslein/util.animate.git"
 	}
 }
