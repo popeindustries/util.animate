@@ -1,6 +1,6 @@
 var polyfill = require('util.polyfill')
 	, easing = require('util.easing')
-	, objectUtils = require('util.object')
+	, identify = require('util.identify')
 	, css = require('dom.css')
 	, win = window
 	, doc = win.document
@@ -151,7 +151,7 @@ Anim.prototype.to = function(properties, duration, ease) {
 			type: 0
 		};
 		// Property is a Function
-		if (objectUtils.isFunction(this.target[prop])) {
+		if (identify.isFunction(this.target[prop])) {
 			p.start = this.target[prop]();
 			p.type = 1;
 		// Property is property
@@ -163,7 +163,7 @@ Anim.prototype.to = function(properties, duration, ease) {
 			current = css.getNumericStyle(this.target, prop);
 			p.start = current[0];
 			// Use ending unit if a string is passed
-			if (objectUtils.isString(val)) {
+			if (identify.isString(val)) {
 				end = css.parseNumber(val, prop);
 				p.unit = end[1];
 				p.end = end[0];
