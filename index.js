@@ -1,20 +1,15 @@
-require('requestAnimationFrame-polyfill');
-// Date.now() polyfill
-Date.now = Date.now
-	|| function () { return new Date().getTime() }
+require('requestAnimationFrame');
 
 var style = require('style')
-	, bind = require('object-utils').bind
 	, isFunction = require('lodash.isfunction')
 	, isString = require('lodash.isstring')
 	, win = window
 	, doc = window.document
 
 	, anims = {}
-	, size = 0
+	, length = 0
 	, pool = []
 	, uid = 1
-	, tick = 0
 	, last = 0
 	, running = false
 
@@ -60,7 +55,6 @@ function add (anim) {
 		// Start if not running
 		if (!running) {
 			running = true;
-			tick = 0;
 			last = Date.now();
 			onTick();
 		}
@@ -114,6 +108,7 @@ function destroy (anim) {
 function onTick (time) {
 	var now = Date.now()
 		, tick = now - last;
+
 	// Store
 	last = now;
 	for (var id in anims) {
@@ -230,7 +225,6 @@ function executeCallbacks (callbacks) {
  * Anim class
  */
 function Anim () {
-	this._render = bind(this._render, this);
 	this.id = null;
 	this.target = null;
 	this.duration = 0;
