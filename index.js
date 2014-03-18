@@ -1,6 +1,5 @@
-var id = require('util.identify');
-
 var style = require('style')
+	, id = require('util.identify')
 	, isFunction = id.isFunction
 	, isString = id.isString
 	, win = window
