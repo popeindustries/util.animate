@@ -1,8 +1,8 @@
-require('requestAnimationFrame');
+ var id = require('util.identify');
 
 var style = require('style')
-	, isFunction = require('lodash.isfunction')
-	, isString = require('lodash.isstring')
+	, isFunction = id.isFunction
+	, isString = id.isString
 	, win = window
 	, doc = window.document
 
