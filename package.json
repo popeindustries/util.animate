@@ -4,12 +4,10 @@
 	"version": "0.0.1",
 	"author": "popeindustries <alex@pope-industries.com>",
 	"dependencies": {
-		"object-utils": "git://github.com/thomaslein/object-utils",
-		"lodash.isfunction": "~2.4.0",
-		"lodash.isstring": "~2.4.0",
-		"util.easing": "git://github.com/thomaslein/util.easing.git#0.0.1",
-		"util.polyfill": "git://github.com/thomaslein/util.polyfill.git#0.0.1",
-		"dom.style": "git://github.com/thomaslein/dom.style.git#0.0.1"
+		"util.identify": "git://github.com/thomaslein/util.identify#0.0.2",
+		"util.easing": "git://github.com/thomaslein/util.easing.git#0.0.2",
+		"util.polyfill": "git://github.com/thomaslein/util.polyfill.git#0.0.2",
+		"dom.style": "git://github.com/thomaslein/dom.style.git#0.0.2"
 	},
 	"main": "index.js",
 	"repository": {
