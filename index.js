@@ -1,4 +1,4 @@
- var id = require('util.identify');
+var id = require('util.identify');
 
 var style = require('style')
 	, isFunction = id.isFunction
