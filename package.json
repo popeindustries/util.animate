@@ -1,17 +1,18 @@
 {
-	"name": "util.animate",
-	"description": "Cross-browser animation engine, using CSS transitions where possible",
-	"version": "0.0.1",
-	"author": "popeindustries <alex@pope-industries.com>",
-	"dependencies": {
-		"util.identify": "git://github.com/thomaslein/util.identify#0.0.2",
-		"util.easing": "git://github.com/thomaslein/util.easing.git#0.0.2",
-		"util.polyfill": "git://github.com/thomaslein/util.polyfill.git#0.0.2",
-		"dom.style": "git://github.com/thomaslein/dom.style.git#0.0.2"
-	},
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/thomaslein/util.animate.git"
-	}
+  "name": "animate",
+  "description": "Cross-browser animation engine, using CSS transitions where possible",
+  "version": "0.0.2",
+  "author": "Alexander Pope <alexander.pope@nrk.no>",
+  "dependencies": {
+    "ease": "git://github.com/thomaslein/ease.git",
+    "style": "git://github.com/thomaslein/style.git",
+    "lodash.isfunction": "^2.4.0",
+    "lodash.isstring": "^2.4.0"
+  },
+  "devDependencies": {
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/thomaslein/animate.git"
+  }
 }
