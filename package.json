@@ -4,10 +4,9 @@
   "version": "0.0.2",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
+    "util.identify": "git://github.com/thomaslein/util.identify.git",
     "util.easing": "git://github.com/thomaslein/util.easing.git",
-    "dom.style": "git://github.com/thomaslein/dom.style.git",
-    "lodash.isfunction": "^2.4.0",
-    "lodash.isstring": "^2.4.0"
+    "dom.style": "git://github.com/thomaslein/dom.style.git"
   },
   "devDependencies": {
     "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame-polyfill"
