@@ -14,7 +14,7 @@ var style = require('dom.style')
 
 	, FRAME_RATE = 60
 	, DEFAULT_DURATION = 500
-	, DEFAULT_EASING = require('util.easing').outCubic
+	, DEFAULT_EASING = require('util.easing/lib/cubic').outCubic
 	, POOL_SIZE = 10;
 
 module.exports = animate;
