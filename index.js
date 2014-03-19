@@ -1,4 +1,4 @@
-var style = require('style')
+var style = require('dom.style')
 	, isFunction = require('lodash.isfunction')
 	, isString = require('lodash.isstring')
 	, win = window
@@ -13,7 +13,7 @@ var style = require('style')
 
 	, FRAME_RATE = 60
 	, DEFAULT_DURATION = 500
-	, DEFAULT_EASING = require('ease/lib/cubic').outCubic
+	, DEFAULT_EASING = require('util.easing').outCubic
 	, POOL_SIZE = 10;
 
 module.exports = animate;
