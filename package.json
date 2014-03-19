@@ -4,15 +4,17 @@
   "version": "0.0.2",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
-    "ease": "git://github.com/thomaslein/ease.git",
-    "style": "git://github.com/thomaslein/style.git",
+    "ease": "git://github.com/thomaslein/util.easing.git",
+    "style": "git://github.com/thomaslein/dom.style.git",
     "lodash.isfunction": "^2.4.0",
     "lodash.isstring": "^2.4.0"
   },
   "devDependencies": {
-    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame"
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame-polyfill"
   },
   "main": "index.js",
-  "repository": "https://github.com/thomaslein/animate.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thomaslein/util.animate.git"
   }
 }
