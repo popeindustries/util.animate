@@ -1,8 +1,8 @@
 {
-  "name": "animate",
+  "name": "util.animate",
   "description": "Cross-browser animation engine, using CSS transitions where possible",
   "version": "0.0.2",
-  "author": "Alexander Pope <alexander.pope@nrk.no>",
+  "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
     "ease": "git://github.com/thomaslein/ease.git",
     "style": "git://github.com/thomaslein/style.git",
