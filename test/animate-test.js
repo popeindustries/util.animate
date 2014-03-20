@@ -3,13 +3,13 @@ var animate, style, expect, element;
 // Make it work in node..
 try {
 	animate = require('../index.js');
-	style = require('style');
+	style = require('dom.style');
 	expect = require('expect.js');
 	require('./sauce.js');
 // .. or browser
 } catch (err) {
-	animate = require('./animate');
-	style = require('style');
+	animate = require('./util.animate');
+	style = require('dom.style');
 	expect = window.expect;
 }
 
