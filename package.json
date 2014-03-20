@@ -5,9 +5,8 @@
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
     "util.easing": "git://github.com/thomaslein/util.easing.git",
-    "dom.style": "git://github.com/thomaslein/dom.style.git",
-    "lodash.isfunction": "^2.4.0",
-    "lodash.isstring": "^2.4.0"
+    "util.identify": "git://github.com/thomaslein/util.identify.git",
+    "dom.style": "git://github.com/thomaslein/dom.style.git"
   },
   "devDependencies": {
     "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame",
@@ -18,7 +17,7 @@
     "term-canvas": "*"
   },
   "main": "index.js",
-  "repository": "https://github.com/thomaslein/util.animate.git",
+  "repository": "git://github.com/thomaslein/util.animate.git",
   "scripts": {
     "test": "buddy build && mocha-phantomjs test/test-runner.html -t 4000",
     "sauce": "node test/sauce.js"
