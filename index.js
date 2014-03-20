@@ -1,4 +1,4 @@
-var style = require('util.style')
+var style = require('dom.style')
 	, isFunction = require('lodash.isfunction')
 	, isString = require('lodash.isstring')
 	, win = window
