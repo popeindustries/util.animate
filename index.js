@@ -1,7 +1,6 @@
-var style = require('dom.style')
-	,	identify = require('util.identify')
-	, isFunction = identify.isFunction
-	, isString = identify.isString
+var style = require('style')
+	, isFunction = require('lodash.isfunction')
+	, isString = require('lodash.isstring')
 	, win = window
 	, doc = window.document
 

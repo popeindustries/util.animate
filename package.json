@@ -4,16 +4,39 @@
   "version": "0.0.2",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
-    "util.identify": "git://github.com/thomaslein/util.identify.git",
     "util.easing": "git://github.com/thomaslein/util.easing.git",
-    "dom.style": "git://github.com/thomaslein/dom.style.git"
+    "util.style": "git://github.com/thomaslein/util.style.git",
+    "lodash.isfunction": "^2.4.0",
+    "lodash.isstring": "^2.4.0"
   },
   "devDependencies": {
-    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame-polyfill"
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame",
+    "mocha": "*",
+    "expect.js": "*",
+    "buddy": "*",
+    "mocha-sauce": "git://github.com/pbakaus/mocha-sauce.git",
+    "term-canvas": "*"
   },
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/thomaslein/util.animate.git"
+  "repository": "https://github.com/thomaslein/util.animate.git",
+  "scripts": {
+    "test": "buddy build && mocha-phantomjs test/test-runner.html -t 4000",
+    "sauce": "node test/sauce.js"
+  },
+  "buddy": {
+    "build": {
+      "js": {
+        "targets": [{
+          "input": "test/src/index.js",
+          "output": "test/animate.js",
+          "boilerplate": true,
+          "bootstrap": true
+        }]
+      }
+    },
+    "server": {
+      "directory": ".",
+      "port": 8000
+    }
   }
 }

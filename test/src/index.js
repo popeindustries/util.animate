@@ -1,0 +1,2 @@
+require('requestAnimationFrame');
+require('../../');
