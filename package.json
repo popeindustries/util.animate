@@ -5,7 +5,7 @@
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
     "util.easing": "git://github.com/thomaslein/util.easing.git",
-    "util.style": "git://github.com/thomaslein/util.style.git",
+    "dom.style": "git://github.com/thomaslein/dom.style.git",
     "lodash.isfunction": "^2.4.0",
     "lodash.isstring": "^2.4.0"
   },
