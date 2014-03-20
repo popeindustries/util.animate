@@ -208,6 +208,7 @@ require.register('dom.style', function(module, exports, require) {
   // TODO: handle setting special shortcut transform properties with arrays (translate, scale)?
   
   var identify = require('util.identify')
+  	, isObject = identify.isObject
   	, isNan = identify.isNaN
   	, isArray = identify.isArray
   	, isString = identify.isString
@@ -312,7 +313,7 @@ require.register('dom.style', function(module, exports, require) {
   		skewY: [1,1],
   		skewX: [2,2]
   	};
-  
+  	
   // Store all possible styles this platform supports
   var s = current(doc.documentElement)
   	, add = function (prop) {
