@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
-    "util.easing": "git://github.com/thomaslein/util.easing.git",
+    "util.ease": "git://github.com/thomaslein/util.ease.git",
     "util.identify": "git://github.com/thomaslein/util.identify.git",
     "dom.style": "git://github.com/thomaslein/dom.style.git"
   },
