@@ -4,12 +4,12 @@
   "version": "0.0.2",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
-    "util.ease": "git://github.com/thomaslein/util.ease.git",
-    "util.identify": "git://github.com/thomaslein/util.identify.git",
-    "dom.style": "git://github.com/thomaslein/dom.style.git"
+    "util.ease": "git://github.com/thomaslein/util.ease.git#0.0.2",
+    "util.identify": "git://github.com/thomaslein/util.identify.git#0.0.2",
+    "dom.style": "git://github.com/thomaslein/dom.style.git#0.0.2"
   },
   "devDependencies": {
-    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame",
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame#0.1.0",
     "mocha": "*",
     "expect.js": "*",
     "buddy": "*",
