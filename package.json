@@ -1,7 +1,7 @@
 {
   "name": "util.animate",
   "description": "Cross-browser animation engine, using CSS transitions where possible",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Thomas Lein <thomaslein@gmail.com>",
   "dependencies": {
     "util.ease": "git://github.com/thomaslein/util.ease.git#0.0.2",
