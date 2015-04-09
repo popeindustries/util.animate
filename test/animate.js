@@ -208,11 +208,6 @@ require.register('dom.style', function(module, exports, require) {
   // TODO: handle setting special shortcut transform properties with arrays (translate, scale)?
   
   var identify = require('util.identify')
-  	, isObject = identify.isObject
-  	, isNan = identify.isNaN
-  	, isArray = identify.isArray
-  	, isString = identify.isString
-  	, map = [].map
   	, win = window
   	, doc = window.document
   	, el = doc.createElement('div')
@@ -290,6 +285,8 @@ require.register('dom.style', function(module, exports, require) {
   			'matrix3d': true
   		}
   
+  	, transformBulk = ''
+  
   	, platformStyles = {}
   	, platformPrefix = ''
   
@@ -313,7 +310,7 @@ require.register('dom.style', function(module, exports, require) {
   		skewY: [1,1],
   		skewX: [2,2]
   	};
-  	
+  
   // Store all possible styles this platform supports
   var s = current(doc.documentElement)
   	, add = function (prop) {
@@ -518,8 +515,8 @@ require.register('dom.style', function(module, exports, require) {
   	}
   
   	// Handle arrays of values (translate, scale)
-  	if (isArray(value)) {
-  		return map(value, function (val) {
+  	if (identify.isArray(value)) {
+  		return value.map(function (val) {
   			return parseNumber(val, property);
   		});
   	}
@@ -541,7 +538,7 @@ require.register('dom.style', function(module, exports, require) {
   	// Handle numbers
   	} else {
   		num = parseFloat(value);
-  		if (isNan(num)) {
+  		if (identify.isNaN(num)) {
   			return [value, ''];
   		} else {
   			unitTest = RE_UNITS.exec(value);
@@ -685,10 +682,10 @@ require.register('dom.style', function(module, exports, require) {
   					+ ')';
   			case 'translate':
   			case 'translate3d':
-  				if (isArray(value)) {
+  				if (identify.isArray(value)) {
   					// Add default unit
-  					value = map(value, function(item) {
-  						return !isString(item) ? item + 'px': item;
+  					value = value.map(function(item) {
+  						return !identify.isString(item) ? item + 'px': item;
   					})
   					.join(', ');
   				}
@@ -700,7 +697,7 @@ require.register('dom.style', function(module, exports, require) {
   					+ ')';
   			case 'scale':
   			case 'scale3d':
-  				if (isArray(value)) {
+  				if (identify.isArray(value)) {
   					value = value.join(', ');
   				}
   				return ''
@@ -795,7 +792,7 @@ require.register('dom.style', function(module, exports, require) {
   	// Expand shorthands
   	prop = expandShorthand(property, value);
   	// Handle property hash returned from expandShorthand
-  	if (isObject(prop)) {
+  	if (identify.isObject(prop)) {
   		for (var p in prop) {
   			setStyle(element, p, prop[p]);
   		}
@@ -820,12 +817,12 @@ require.register('dom.style', function(module, exports, require) {
   	prop = getPrefixed(prop);
   
   	// Handle special transform properties
-  	// TODO: bulk multiple transforms?
   	if (transform[property]) {
-  		value = generateTransform(element, property, value);
+  		transformBulk += ' ' + generateTransform(element, property, value);
+  		element.style[camelCase(prop)] = transformBulk;
+  	}else{
+  		element.style[camelCase(prop)] = value;
   	}
-  
-  	element.style[camelCase(prop)] = value;
   }
   
   /**
@@ -895,7 +892,7 @@ require.register('dom.style', function(module, exports, require) {
    * @returns {Array}
    */
   function matrixStringToArray (matrix) {
-  	if (isArray(matrix)) {
+  	if (identify.isArray(matrix)) {
   		return matrix;
   	} else if (re = matrix.match(RE_MATRIX)) {
   		// Convert string to array
@@ -907,7 +904,7 @@ require.register('dom.style', function(module, exports, require) {
   }
   
 });
-require.register('util.easing/lib/cubic', function(module, exports, require) {
+require.register('util.ease/lib/cubic', function(module, exports, require) {
   // t: current time, b: beginning value, c: change in value, d: duration
   
   exports.inCubic = {
@@ -939,6 +936,8 @@ require.register('util.animate', function(module, exports, require) {
   	, identify = require('util.identify')
   	, isFunction = identify.isFunction
   	, isString = identify.isString
+  	, isObject = identify.isObject
+  	, isArray = identify.isArray
   	, win = window
   	, doc = window.document
   
@@ -951,7 +950,7 @@ require.register('util.animate', function(module, exports, require) {
   
   	, FRAME_RATE = 60
   	, DEFAULT_DURATION = 500
-  	, DEFAULT_EASING = require('util.easing/lib/cubic').outCubic
+  	, DEFAULT_EASING = require('util.ease/lib/cubic').outCubic
   	, POOL_SIZE = 10;
   
   module.exports = animate;
@@ -1208,7 +1207,7 @@ require.register('util.animate', function(module, exports, require) {
   			p.start = this.target[prop]();
   			p.type = 1;
   
-  		// Property is property
+  		//Property is a property
   		} else if (prop in this.target) {
   			p.start = this.target[prop];
   			p.type = 2;
@@ -1217,7 +1216,7 @@ require.register('util.animate', function(module, exports, require) {
   		} else {
   			current = style.getNumericStyle(this.target, prop);
   			p.start = current[0];
-  
+  			
   			// Use ending unit if a string is passed
   			if (isString(val)) {
   				end = style.parseNumber(val, prop);
@@ -1241,7 +1240,12 @@ require.register('util.animate', function(module, exports, require) {
   					this.usingCssTransitions = true;
   				}
   				p.type = 4;
-  				style.setStyle(this.target, prop, p.end + p.unit);
+  				//Handle transform units later
+  				if(isArray(p.end)){
+  					style.setStyle(this.target, prop, p.end);
+  				}else{
+  					style.setStyle(this.target, prop, p.end + p.unit);
+  				}
   			} else {
   				p.type = 3;
   			}

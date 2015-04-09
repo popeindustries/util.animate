@@ -2,6 +2,8 @@ var style = require('dom.style')
 	, identify = require('util.identify')
 	, isFunction = identify.isFunction
 	, isString = identify.isString
+	, isObject = identify.isObject
+	, isArray = identify.isArray
 	, win = window
 	, doc = window.document
 
@@ -271,8 +273,8 @@ Anim.prototype.to = function (properties, duration, ease) {
 			p.start = this.target[prop]();
 			p.type = 1;
 
-		//Property is a Object
-		} else if (isObject(this.target[prop])) {
+		//Property is a property
+		} else if (prop in this.target) {
 			p.start = this.target[prop];
 			p.type = 2;
 
