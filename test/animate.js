@@ -936,7 +936,6 @@ require.register('util.animate', function(module, exports, require) {
   	, identify = require('util.identify')
   	, isFunction = identify.isFunction
   	, isString = identify.isString
-  	, isObject = identify.isObject
   	, isArray = identify.isArray
   	, win = window
   	, doc = window.document
@@ -1208,7 +1207,7 @@ require.register('util.animate', function(module, exports, require) {
   			p.type = 1;
   
   		//Property is a property
-  		} else if (prop in this.target) {
+  		} else if (prop in this.target && !isArray(p.end)) {
   			p.start = this.target[prop];
   			p.type = 2;
   
