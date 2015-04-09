@@ -271,8 +271,8 @@ Anim.prototype.to = function (properties, duration, ease) {
 			p.start = this.target[prop]();
 			p.type = 1;
 
-		// Property is property
-		} else if (prop in this.target) {
+		//Property is a Object
+		} else if (isObject(this.target[prop])) {
 			p.start = this.target[prop];
 			p.type = 2;
 
@@ -280,7 +280,7 @@ Anim.prototype.to = function (properties, duration, ease) {
 		} else {
 			current = style.getNumericStyle(this.target, prop);
 			p.start = current[0];
-
+			
 			// Use ending unit if a string is passed
 			if (isString(val)) {
 				end = style.parseNumber(val, prop);
@@ -304,7 +304,12 @@ Anim.prototype.to = function (properties, duration, ease) {
 					this.usingCssTransitions = true;
 				}
 				p.type = 4;
-				style.setStyle(this.target, prop, p.end + p.unit);
+				//Handle transform units later
+				if(isArray(p.end)){
+					style.setStyle(this.target, prop, p.end);
+				}else{
+					style.setStyle(this.target, prop, p.end + p.unit);
+				}
 			} else {
 				p.type = 3;
 			}
