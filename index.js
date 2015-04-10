@@ -1,3 +1,4 @@
+require('requestAnimationFrame')
 var style = require('dom.style')
 	, identify = require('util.identify')
 	, isFunction = identify.isFunction
