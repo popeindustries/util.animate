@@ -9,7 +9,7 @@
     "dom.style": "git://github.com/thomaslein/dom.style.git#0.2.0"
   },
   "devDependencies": {
-    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame#0.1.0",
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame.git#0.1.0",
     "mocha": "*",
     "expect.js": "*",
     "buddy": "^1.3.4",
