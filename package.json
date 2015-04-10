@@ -6,10 +6,10 @@
   "dependencies": {
     "util.ease": "git://github.com/thomaslein/util.ease.git#0.0.2",
     "util.identify": "git://github.com/thomaslein/util.identify.git#0.0.2",
-    "dom.style": "git://github.com/thomaslein/dom.style.git#0.2.0"
+    "dom.style": "git://github.com/thomaslein/dom.style.git#0.2.0",
+    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame.git#0.1.0"
   },
   "devDependencies": {
-    "requestAnimationFrame": "git://github.com/thomaslein/requestAnimationFrame.git#0.1.0",
     "mocha": "*",
     "expect.js": "*",
     "buddy": "^1.3.4",
