@@ -932,6 +932,7 @@ require.register('util.ease/lib/cubic', function(module, exports, require) {
   
 });
 require.register('util.animate', function(module, exports, require) {
+  require('requestAnimationFrame')
   var style = require('dom.style')
   	, identify = require('util.identify')
   	, isFunction = identify.isFunction
@@ -1084,8 +1085,16 @@ require.register('util.animate', function(module, exports, require) {
   			// All types except css transitions
   			if (propObj.type < 4) {
   				b = propObj.start;
-  				c = propObj.end - b;
-  				value = propObj.current = anim.ease.js(dur, b, c, anim.duration);
+  				if (isArray(propObj.end)){
+  					for (var i = 0; i < propObj.end.length; i++) {
+  						c = propObj.end[i] - b;
+  						value = propObj.current = anim.ease.js(dur, b, c, anim.duration);
+  						values.push(value);
+  					};
+  				}else{
+  					c = propObj.end - b;
+  					value = propObj.current = anim.ease.js(dur, b, c, anim.duration);
+  				}
   				switch (propObj.type) {
   					case 1:
   						anim.target[prop](value);
@@ -1094,7 +1103,11 @@ require.register('util.animate', function(module, exports, require) {
   						anim.target[prop] = value;
   						break;
   					case 3:
-  						style.setStyle(anim.target, prop, "" + value + propObj.unit);
+  						if (isArray(propObj.end)){
+  							style.setStyle(anim.target, prop, values);
+  						}else{
+  							style.setStyle(anim.target, prop, "" + value + propObj.unit);
+  						}
   				}
   			}
   		}
