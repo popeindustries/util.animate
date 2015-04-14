@@ -149,6 +149,7 @@ function render (anim, time) {
 		for (var prop in props) {
 			propObj = props[prop];
 			// All types except css transitions
+			var values = [];
 			if (propObj.type < 4) {
 				b = propObj.start;
 				if (isArray(propObj.end)){
