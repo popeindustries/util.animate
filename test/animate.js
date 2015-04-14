@@ -206,6 +206,7 @@ require.register('util.identify', function(module, exports, require) {
 });
 require.register('dom.style', function(module, exports, require) {
   // TODO: handle setting special shortcut transform properties with arrays (translate, scale)?
+  // TODO: bulk transform properties
   
   var identify = require('util.identify')
   	, win = window
@@ -245,8 +246,8 @@ require.register('dom.style', function(module, exports, require) {
   			'rotateX': 'deg',
   			'rotateY': 'deg',
   			'rotateZ': 'deg',
-  			'skewX': 'px',
-  			'skewY': 'px'
+  			'skewX': 'deg',
+  			'skewY': 'deg'
   		}
   	, colour = {
   			'background-color': true,
@@ -278,14 +279,13 @@ require.register('dom.style', function(module, exports, require) {
   			'scaleY': true,
   			'scale3d': true,
   			'scaleZ': true,
+  			'skew': true,
   			'skewX': true,
   			'skewY': true,
   			'perspective': true,
   			'matrix': true,
   			'matrix3d': true
   		}
-  
-  	, transformBulk = ''
   
   	, platformStyles = {}
   	, platformPrefix = ''
@@ -791,6 +791,7 @@ require.register('dom.style', function(module, exports, require) {
   
   	// Expand shorthands
   	prop = expandShorthand(property, value);
+  	
   	// Handle property hash returned from expandShorthand
   	if (identify.isObject(prop)) {
   		for (var p in prop) {
@@ -818,11 +819,9 @@ require.register('dom.style', function(module, exports, require) {
   
   	// Handle special transform properties
   	if (transform[property]) {
-  		transformBulk += ' ' + generateTransform(element, property, value);
-  		element.style[camelCase(prop)] = transformBulk;
-  	}else{
-  		element.style[camelCase(prop)] = value;
+  		value = generateTransform(element, property, value);
   	}
+  	element.style[camelCase(prop)] = value;
   }
   
   /**
@@ -1252,12 +1251,7 @@ require.register('util.animate', function(module, exports, require) {
   					this.usingCssTransitions = true;
   				}
   				p.type = 4;
-  				//Handle transform units later
-  				if(isArray(p.end)){
-  					style.setStyle(this.target, prop, p.end);
-  				}else{
-  					style.setStyle(this.target, prop, p.end + p.unit);
-  				}
+  				style.setStyle(this.target, prop, p.end);
   			} else {
   				p.type = 3;
   			}
