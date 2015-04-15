@@ -4,6 +4,8 @@ var style = require('dom.style')
 	, isFunction = identify.isFunction
 	, isString = identify.isString
 	, isArray = identify.isArray
+	, isObject = identify.isObject
+	, colourUtil = require('util.colour')
 	, win = window
 	, doc = window.document
 
@@ -127,7 +129,7 @@ function onTick (time) {
  */
 function render (anim, time) {
 	var props = anim.properties
-		, b, c, callback, callbacks, dur, propObj, value;
+		, s, e, callback, callbacks, dur, propObj, value;
 
 	anim.elapsed += time;
 	// Make sure total time does not exceed duration
@@ -149,18 +151,35 @@ function render (anim, time) {
 		for (var prop in props) {
 			propObj = props[prop];
 			// All types except css transitions
-			var values = [];
 			if (propObj.type < 4) {
-				b = propObj.start;
+				s = propObj.start;
+				//Handle arrays for transforms like translate and scale
 				if (isArray(propObj.end)){
+					var values = [];
 					for (var i = 0; i < propObj.end.length; i++) {
-						c = propObj.end[i] - b;
-						value = propObj.current = anim.ease.js(dur, b, c, anim.duration);
+						e = propObj.end[i] - s;
+						value = propObj.current = anim.ease.js(dur, s, e, anim.duration);
 						values.push(value);
-					};
+					}
+				//Handle objects for rgb colours
+				}else if(isObject(propObj.end)){
+					var r,g,b;
+					for (var key in propObj.end){
+						if (propObj.end.hasOwnProperty(key)) {
+         			s = propObj.start[key];
+         			e = Math.abs(propObj.end[key] - s);
+         			if (key === 'r'){
+         				r = propObj.current = anim.ease.js(dur, s, e, anim.duration);
+         			}else if( key === 'g'){
+         				g = propObj.current = anim.ease.js(dur, s, e, anim.duration);
+         			}else if (key == 'a'){
+         				b = propObj.current = anim.ease.js(dur, s, e, anim.duration);
+         			}
+    				}
+					}
 				}else{
-					c = propObj.end - b;
-					value = propObj.current = anim.ease.js(dur, b, c, anim.duration);
+					e = propObj.end - s;
+					value = propObj.current = anim.ease.js(dur, s, e, anim.duration);
 				}
 				switch (propObj.type) {
 					case 1:
@@ -170,8 +189,12 @@ function render (anim, time) {
 						anim.target[prop] = value;
 						break;
 					case 3:
+						//Handle arrays for transforms like translate and scale
 						if (isArray(propObj.end)){
 							style.setStyle(anim.target, prop, values);
+						//Handle rgb colors
+						}else if(isObject(propObj.end)){
+							style.setStyle(anim.target, prop, 'rgb('+Math.ceil(r)+','+Math.ceil(g)+','+Math.ceil(b)+')');
 						}else{
 							style.setStyle(anim.target, prop, "" + value + propObj.unit);
 						}
@@ -295,12 +318,20 @@ Anim.prototype.to = function (properties, duration, ease) {
 		} else {
 			current = style.getNumericStyle(this.target, prop);
 			p.start = current[0];
-			
 			// Use ending unit if a string is passed
 			if (isString(val)) {
 				end = style.parseNumber(val, prop);
 				p.unit = end[1];
 				p.end = end[0];
+				if (!style.hasTransitions){
+					// Need to handle colours diffrently with no transitions
+					// TODO: Handle rgba colours
+					if (end[1] === 'hex' || end[1] ===  'rgb'){
+						//Convert colours to component and hex to rgb
+						p.start = colourUtil.toComponent(current[0]);
+						p.end = colourUtil.toComponent(end[0]);
+					}
+				}
 
 			// Use the current unit if none specified
 			} else {
