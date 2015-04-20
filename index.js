@@ -172,7 +172,7 @@ function render (anim, time) {
          				r = propObj.current = anim.ease.js(dur, s, e, anim.duration);
          			}else if( key === 'g'){
          				g = propObj.current = anim.ease.js(dur, s, e, anim.duration);
-         			}else if (key == 'a'){
+         			}else if (key == 'b'){
          				b = propObj.current = anim.ease.js(dur, s, e, anim.duration);
          			}
     				}
